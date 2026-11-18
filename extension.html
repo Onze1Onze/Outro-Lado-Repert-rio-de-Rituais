@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111113" />
+    <title>Outro Lado — Repositório de Rituais</title>
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header class="topbar">
+        <div class="brand-mark" aria-hidden="true"><span>✳</span></div>
+        <div class="brand-copy">
+          <p class="eyebrow">ARQUIVO PARANORMAL</p>
+          <h1>Rituais</h1>
+          <p class="brand-subtitle">Outro Lado · Compêndio</p>
+        </div>
+        <div class="topbar-meta"><span class="status-dot"></span><span>ÍNDICE</span></div>
+      </header>
+
+      <main class="main-content">
+        <section class="toolbar" aria-label="Ferramentas do repositório">
+          <label class="search-box" for="ritual-search">
+            <span class="search-symbol" aria-hidden="true">⌕</span>
+            <input id="ritual-search" type="search" placeholder="Buscar ritual..." autocomplete="off" />
+            <kbd>/</kbd>
+          </label>
+          <div class="toolbar-meta">
+            <span id="result-count" class="result-count">108 REGISTROS</span>
+            <button id="collapse-all" class="text-button" type="button">Recolher círculos</button>
+          </div>
+          <div id="element-filters" class="element-filters" aria-label="Filtrar por elemento"></div>
+        </section>
+
+        <div class="catalog-heading">
+          <div>
+            <p class="section-kicker">ÍNDICE DE CONJURAÇÕES</p>
+            <h2>O repositório</h2>
+          </div>
+          <p class="catalog-scope">LIVRO-BASE + SUPLEMENTOS <span>·</span> 4 CÍRCULOS</p>
+        </div>
+
+        <div id="catalog" class="catalog" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <span class="empty-sigil" aria-hidden="true">∅</span>
+          <h3>Nenhum registro encontrado</h3>
+          <p>Altere os termos da busca ou limpe o filtro de elemento.</p>
+          <button id="clear-filters" class="outline-button" type="button">Limpar filtros</button>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <span>OUTRO LADO <i>·</i> ARQUIVO 01</span>
+        <span id="footer-count">108 RITUAIS INDEXADOS</span>
+      </footer>
+
+      <section id="ritual-detail" class="detail-layer" aria-hidden="true" inert>
+        <div class="detail-backdrop" data-close-detail></div>
+        <article class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+          <header class="detail-topline">
+            <span class="detail-file-label">FICHA DE CONJURAÇÃO</span>
+            <button id="close-detail" class="icon-button" type="button" aria-label="Fechar ficha">×</button>
+          </header>
+          <div id="detail-content" class="detail-content"></div>
+        </article>
+      </section>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
