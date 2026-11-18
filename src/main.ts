@@ -1,7 +1,19 @@
 import OBR from "@owlbear-rodeo/sdk";
 import catalog from "./data/rituals.json";
 import { SIGIL_SVGS } from "./data/sigils";
-function sigilUrl(key: string): string { const svg = SIGIL_SVGS[key as keyof typeof SIGIL_SVGS]; if (!svg) throw new Error("Símbolo elemental não cadastrado: " + key); return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg); }
+const SIGIL_KEY_BY_ELEMENT: Record<string, keyof typeof SIGIL_SVGS> = {
+  knowledge: "conhecimento",
+  energy: "energia",
+  death: "morte",
+  blood: "sangue",
+  fear: "medo",
+};
+function sigilUrl(key: string): string {
+  const assetKey = SIGIL_KEY_BY_ELEMENT[key] ?? key as keyof typeof SIGIL_SVGS;
+  const svg = SIGIL_SVGS[assetKey];
+  if (!svg) throw new Error("Símbolo elemental não cadastrado: " + key);
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
 import { CIRCLE_LABELS, ELEMENTS, ELEMENT_BY_NAME, type ElementName } from "./data/elements";
 import "./ui/styles.css";
 
