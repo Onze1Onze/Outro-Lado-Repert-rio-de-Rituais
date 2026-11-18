@@ -1,8 +1,15 @@
 const sigilDataNode = document.getElementById("sigil-data");
 if (!sigilDataNode) throw new Error("Símbolos dos elementos não encontrados.");
 const SIGILS = JSON.parse(sigilDataNode.textContent);
+const SIGIL_KEY_BY_ELEMENT = {
+  knowledge: "conhecimento",
+  energy: "energia",
+  death: "morte",
+  blood: "sangue",
+  fear: "medo"
+};
 function sigilUrl(key) {
-  const svg = SIGILS[key];
+  const svg = SIGILS[SIGIL_KEY_BY_ELEMENT[key] || key];
   if (!svg) throw new Error("Símbolo elemental não cadastrado: " + key);
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
