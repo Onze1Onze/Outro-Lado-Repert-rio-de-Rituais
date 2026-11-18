@@ -21,7 +21,7 @@ for (const [index, ritual] of data.rituals.entries()) {
   assert.ok(elements.length && elements.every(e => allowedElements.includes(e)), `Elemento inválido: ${ritual.n}`);
   if (elements.length > 1) assert.ok(['choice', 'dual'].includes(ritual.m), `Modo multi-elemento ausente: ${ritual.n}`);
   else assert.ok(!ritual.m, `Modo multi-elemento indevido: ${ritual.n}`);
-  const key = `${ritual.c}|${ritual.n.normalize('NFD').replace(/\\p{Diacritic}/gu, '').toLowerCase()}`;
+  const key = `${ritual.c}|${ritual.n.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()}`;
   assert.ok(!names.has(key), `Nome duplicado no círculo: ${ritual.n}`); names.add(key);
   assert.ok(Object.hasOwn(expectedUniqueByScope, ritual.s), `Fonte não esperada em ${ritual.n}: ${ritual.s}`);
   assert.ok(data.sources[ritual.s], `Rótulo de fonte ausente: ${ritual.s}`);
