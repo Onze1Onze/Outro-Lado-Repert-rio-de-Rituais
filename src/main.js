@@ -20,7 +20,7 @@ const catalog = JSON.parse(dataNode.textContent);
 const ELEMENTS = [
   { name: "Conhecimento", key: "knowledge", accent: "#D9B24C", icon: "conhecimento.svg" },
   { name: "Energia", key: "energy", accent: "#55DDEB", secondary: "#E477C2", icon: "energia.svg" },
-  { name: "Morte", key: "death", accent: "#08090B", surface: "#C9C7C5", contrast: "#111113", icon: "morte.svg" },
+  { name: "Morte", key: "death", accent: "#55585E", icon: "morte.svg" },
   { name: "Sangue", key: "blood", accent: "#E23440", icon: "sangue.svg" },
   { name: "Medo", key: "fear", accent: "#F2F1EE", icon: "medo.svg" }
 ];
