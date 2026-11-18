@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#111113" />
     <title>Outro Lado — Repositório de Rituais</title>
-    <link rel="icon" href="./icon.svg?v=1.0.1" type="image/svg+xml" />
-    <link rel="stylesheet" href="./src/ui/styles.css?v=1.0.1" />
+    <link rel="icon" href="./icon.svg?v=1.0.2" type="image/svg+xml" />
+    <link rel="stylesheet" href="./src/ui/styles.css?v=1.0.2" />
     <style>
       .load-error{margin:12px;padding:16px;border:1px solid #a53d45;background:#241316;color:#e8ded8;font:12px Arial,sans-serif}
       .load-error h2{font:18px Georgia,serif}
@@ -15,15 +15,6 @@
   </head>
   <body>
     <div id="app" class="app-shell">
-      <header class="topbar">
-        <div class="brand-mark" aria-hidden="true"><span>✳</span></div>
-        <div class="brand-copy">
-          <p class="eyebrow">ARQUIVO PARANORMAL</p>
-          <h1>Rituais</h1>
-          <p class="brand-subtitle">Outro Lado · Compêndio</p>
-        </div>
-        <div class="topbar-meta"><span class="status-dot"></span><span>ÍNDICE</span></div>
-      </header>
       <main class="main-content">
         <section class="toolbar" aria-label="Ferramentas do repositório">
           <label class="search-box" for="ritual-search">
@@ -37,9 +28,7 @@
           </div>
           <div id="element-filters" class="element-filters" aria-label="Filtrar por elemento"></div>
         </section>
-        <div class="catalog-heading">
-          <div><p class="section-kicker">ÍNDICE DE CONJURAÇÕES</p><h2>O repositório</h2></div>
-          <p class="catalog-scope">LIVRO-BASE + SUPLEMENTOS <span>·</span> 4 CÍRCULOS</p>
+        <p class="catalog-scope">LIVRO-BASE + SUPLEMENTOS <span>·</span> 4 CÍRCULOS</p>
         </div>
         <div id="catalog" class="catalog" aria-live="polite"></div>
         <div id="empty-state" class="empty-state" hidden>
@@ -54,15 +43,11 @@
           <button id="reload-app" type="button">Recarregar</button>
         </div>
       </main>
-      <footer class="app-footer">
-        <span>OUTRO LADO <i>·</i> ARQUIVO 01</span>
-        <span id="footer-count">CATÁLOGO LOCAL</span>
-      </footer>
       <section id="ritual-detail" class="detail-layer" aria-hidden="true" inert>
         <div class="detail-backdrop" data-close-detail></div>
         <article class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
           <header class="detail-topline">
-            <span class="detail-file-label">FICHA DE CONJURAÇÃO</span>
+            
             <button id="close-detail" class="icon-button" type="button" aria-label="Fechar ficha">×</button>
           </header>
           <div id="detail-content" class="detail-content"></div>
@@ -85,6 +70,6 @@
         if (message) message.textContent = "Falha ao carregar o catálogo: " + String(event.reason || "erro desconhecido");
       });
     </script>
-    <script type="module" src="./src/main.js?v=1.0.1"></script>
+    <script type="module" src="./src/main.js?v=1.0.2"></script>
   </body>
 </html>
