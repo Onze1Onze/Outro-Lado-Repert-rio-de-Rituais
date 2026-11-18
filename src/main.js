@@ -1,14 +1,14 @@
 import catalog from "./data/rituals.json" with { type: "json" };
 
 const ELEMENTS = [
-  { name: "Conhecimento", key: "knowledge", accent: "#b895d5", symbol: "◉", descriptor: "SIGILO · MEMÓRIA · REVELAÇÃO" },
-  { name: "Energia", key: "energy", accent: "#83c58b", symbol: "ϟ", descriptor: "CAOS · MOVIMENTO · IMPULSO" },
-  { name: "Morte", key: "death", accent: "#c4c8cb", symbol: "⟲", descriptor: "TEMPO · ESPIRAL · ENTROPIA" },
-  { name: "Sangue", key: "blood", accent: "#d45b64", symbol: "✦", descriptor: "CARNE · INSTINTO · VIOLÊNCIA" },
-  { name: "Medo", key: "fear", accent: "#d3b66f", symbol: "◇", descriptor: "O INOMINÁVEL · LIMIAR" }
+  { name: "Conhecimento", key: "knowledge", accent: "#D9B24C", icon: "conhecimento.svg" },
+  { name: "Energia", key: "energy", accent: "#55DDEB", secondary: "#E477C2", icon: "energia.svg" },
+  { name: "Morte", key: "death", accent: "#08090B", surface: "#C9C7C5", contrast: "#111113", icon: "morte.svg" },
+  { name: "Sangue", key: "blood", accent: "#E23440", icon: "sangue.svg" },
+  { name: "Medo", key: "fear", accent: "#F2F1EE", icon: "medo.svg" }
 ];
 const BY_NAME = new Map(ELEMENTS.map(function (item) { return [item.name, item]; }));
-const CIRCLES = { 1: "PRIMEIRO CÍRCULO", 2: "SEGUNDO CÍRCULO", 3: "TERCEIRO CÍRCULO", 4: "QUARTO CÍRCULO" };
+const CIRCLES = { 1: "1º Círculo", 2: "2º Círculo", 3: "3º Círculo", 4: "4º Círculo" };
 const SOURCE_NAMES = Array.isArray(catalog) ? {} : (catalog.sources || {});
 const raw = Array.isArray(catalog) ? catalog : catalog.rituals;
 function node(selector) { const found = document.querySelector(selector); if (!found) throw new Error("Elemento ausente: " + selector); return found; }
@@ -62,7 +62,8 @@ function filtered(ritual) {
 }
 function renderFilters() {
   ui.filters.innerHTML = ELEMENTS.map(function (element) {
-    return '<button class="filter-chip" type="button" data-filter-element="' + esc(element.name) + '" aria-pressed="' + (selectedElement === element.name) + '" style="--element-accent:' + element.accent + '"><span class="filter-dot" aria-hidden="true"></span>' + esc(element.name) + '</button>';
+    return '<button class="filter-chip" type="button" data-filter-element="' + esc(element.name) + '" aria-pressed="' + (selectedElement === element.name) + '" style="--element-accent:' + element.accent + '">' +
+      '<img class="filter-icon" src="./assets/elements/' + element.icon + '" alt="" draggable="false"><span>' + esc(element.name) + '</span></button>';
   }).join("");
 }
 function makeCard(ritual, theme) {
@@ -75,9 +76,12 @@ function makeCard(ritual, theme) {
     if (secondary) button.style.setProperty("--element-accent-secondary", secondary.accent);
   }
   button.setAttribute("aria-label", ritual.name + ", " + ritual.circle + "º círculo, " + elementLabel(ritual) + ". Abrir ficha.");
-  button.innerHTML = '<span class="card-sigil" aria-hidden="true"><span>' + theme.symbol + '</span></span>' +
+  button.innerHTML = '<span class="card-sigil" aria-hidden="true">' + ritual.elements.map(function (name) {
+      const symbolTheme = BY_NAME.get(name);
+      return '<img class="ritual-symbol" src="./assets/elements/' + symbolTheme.icon + '" alt="" draggable="false">';
+    }).join("") + '</span>' +
     '<span class="card-copy"><span class="card-title">' + esc(ritual.name) + '</span>' +
-    '<span class="card-subtitle">' + ritual.circle + 'º Círculo — ' + esc(elementLabel(ritual)) + '</span></span>' +
+    '<span class="card-subtitle">' + ritual.circle + 'º · ' + esc(elementLabel(ritual)) + '</span></span>' +
     '<span class="card-arrow" aria-hidden="true">›</span>';
   button.addEventListener("click", function () { openDetail(ritual); });
   return button;
@@ -99,8 +103,8 @@ function renderCatalog() {
     section.className = "circle-section" + (collapsed ? " is-collapsed" : "");
     const header = document.createElement("button"); header.className = "circle-header"; header.type = "button";
     header.setAttribute("aria-expanded", String(!collapsed));
-    header.innerHTML = '<span class="circle-medallion" aria-hidden="true">' + ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ"][circle - 1] + '</span>' +
-      '<span class="circle-title">' + CIRCLES[circle] + '</span><span class="circle-count">' + circleRecords.length + ' REG.</span><span class="chevron" aria-hidden="true">⌄</span>';
+    header.innerHTML = '<span class="circle-title">' + CIRCLES[circle] + '</span>' +
+      '<span class="circle-count">' + circleRecords.length + '</span><span class="chevron" aria-hidden="true">⌄</span>';
     header.addEventListener("click", function () {
       section.classList.toggle("is-collapsed");
       header.setAttribute("aria-expanded", String(!section.classList.contains("is-collapsed")));
@@ -113,9 +117,9 @@ function renderCatalog() {
       if (!group.length) return;
       const groupNode = document.createElement("section"); groupNode.className = "element-section";
       groupNode.dataset.element = element.key; groupNode.style.setProperty("--element-accent", element.accent);
-      groupNode.innerHTML = '<header class="element-heading"><span class="element-sigil" aria-hidden="true"><span>' + element.symbol + '</span></span>' +
-        '<div><h3 class="element-name">' + esc(element.name) + '</h3><p class="element-descriptor">' + esc(element.descriptor) + '</p></div>' +
-        '<span class="element-total">' + group.length + (group.length === 1 ? " RITUAL" : " RITUAIS") + '</span></header><div class="ritual-grid"></div>';
+      groupNode.innerHTML = '<header class="element-heading"><span class="element-sigil" aria-hidden="true"><img src="./assets/elements/' + element.icon + '" alt="" draggable="false"></span>' +
+        '<h3 class="element-name">' + esc(element.name) + '</h3>' +
+        '<span class="element-total">' + group.length + '</span></header><div class="ritual-grid"></div>';
       const grid = groupNode.querySelector(".ritual-grid");
       group.forEach(function (ritual) { grid.append(makeCard(ritual, element)); });
       body.append(groupNode);
@@ -148,9 +152,8 @@ function renderDetail(ritual) {
   const pending = missing.length ? '<section class="detail-section"><h3>Dados ainda não cadastrados</h3><div class="detail-missing"><strong>Campos pendentes</strong><br>' +
     esc(missing.join(" · ")) + '. Nenhuma informação foi inferida ou inventada; os campos permanecem vazios até conferência na fonte correspondente.</div></section>' : "";
   ui.detailContent.innerHTML = '<section class="detail-hero' + (themes.length > 1 ? " is-multi-element" : "") + '" style="--detail-accent:' + theme.accent + ';--detail-accent-secondary:' + (themes[1] ? themes[1].accent : theme.accent) + '">' +
-    '<div class="detail-symbol" aria-hidden="true" style="font-size:' + (themes.length > 2 ? 15 : (themes.length > 1 ? 26 : 37)) + 'px">' + themes.map(function (item) { return item.symbol; }).join(" · ") + '</div>' +
-    '<p class="detail-kicker">' + esc(label) + ' · ' + ritual.circle + 'º CÍRCULO</p><h2 class="detail-title" id="detail-title">' + esc(ritual.name) + '</h2>' +
-    '<p class="detail-element-line">' + esc(theme.descriptor) + '</p></section>' + meta + param + paragraphs + pending +
+    '<div class="detail-symbol" aria-hidden="true">' + themes.map(function (item) { return '<img src="./assets/elements/' + item.icon + '" alt="" draggable="false">'; }).join("") + '</div>' +
+    '<h2 class="detail-title" id="detail-title">' + esc(ritual.name) + '</h2></section>' + meta + param + paragraphs + pending +
     (ritual.note ? '<section class="detail-section"><h3>Nota do índice</h3><div class="detail-missing">' + esc(ritual.note) + '</div></section>' : "") +
     (ritual.sourceNote ? '<section class="detail-section"><h3>Nota de verificação</h3><div class="detail-missing">' + esc(ritual.sourceNote) + '</div></section>' : "") +
     '<p class="detail-source">Fonte: ' + esc(ritual.source) + ' · ' + verification + '. Os dados exibidos se limitam ao que foi cadastrado para este registro.</p>';
