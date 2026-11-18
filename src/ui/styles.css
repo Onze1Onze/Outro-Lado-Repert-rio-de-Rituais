@@ -144,3 +144,21 @@ button:focus-visible,input:focus-visible{outline:2px solid #e2c66f;outline-offse
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
+
+/* Morte — cinza escuro em toda a interface */
+:root{--death:#55585E}
+.filter-chip[data-filter-element="Morte"]{color:#D0D1D3;background:#24262A;border-color:#55585E}
+.filter-chip[data-filter-element="Morte"]:hover,.filter-chip[data-filter-element="Morte"][aria-pressed=true]{background:#303238;border-color:#777B82}
+.sigil-unit[data-element="death"]{background:#24262A;border-color:#55585E}
+.element-section[data-element="death"]{border-color:#4C4F54;border-left-color:#55585E;background:#1D1F23}
+.element-section[data-element="death"] .element-sigil{border-color:#55585E;background:#25272B}
+.element-section[data-element="death"] .element-name{color:#777B82}
+.element-section[data-element="death"] .element-total{color:#A4A5A8}
+.ritual-card[data-element="death"]{border-color:#4C4F54;color:#E3E0DC;background:#141619}
+.ritual-card[data-element="death"]:hover{border-color:#777B82;background:#202328}
+.ritual-card[data-element="death"] .card-title{color:#E3E0DC}
+.ritual-card[data-element="death"] .card-subtitle{color:#A6A7AA}
+.detail-sigil[data-element="death"]{background:#24262A;border-color:#55585E}
+.detail-layer[data-element="death"] .detail-symbol{background:#24262A;border-color:#55585E}
+.detail-layer[data-element="death"] .detail-hero{background:#1D1F23;border-color:#55585E}
+.detail-layer[data-element="death"] .detail-title{color:#E3E0DC}
