@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1932 1932" width="256" height="256">
+  <defs><filter id="brush" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
+  <g fill="#08090B" stroke="#08090B" stroke-linecap="round" stroke-linejoin="round" filter="url(#brush)">
+    <polygon stroke="none" points="1156,75 1168,58 1182,100 1190,200 1196,370 1182,418 1140,402 1150,300 1152,160"/>
+    <polygon stroke="none" points="385,392 402,384 520,500 650,610 775,735 760,765 640,660 520,545 400,430"/>
+    <polyline fill="none" stroke-width="10" points="412,448 470,500 560,590"/>
+    <polygon stroke="none" points="574,1500 600,1478 700,1340 765,1225 825,1240 745,1360 665,1450 612,1500"/>
+    <polygon stroke="none" points="944,1255 1040,1255 1030,1450 1010,1650 1000,1800 988,1870 970,1830 958,1650 950,1450"/>
+    <polyline fill="none" stroke-width="10" points="1022,1510 1015,1640 1022,1780"/>
+    <polygon stroke="none" points="1005,1285 1075,1285 1130,1370 1200,1470 1262,1590 1246,1612 1130,1450 1010,1345"/>
+    <path fill="none" stroke-width="14" d="M1062,386 C880,412 700,505 622,640 C560,760 558,950 622,1062"/>
+    <path fill="none" stroke-width="14" d="M1210,382 C1300,402 1385,480 1440,590"/>
+    <path fill="none" stroke-width="14" d="M1425,742 C1470,850 1472,950 1460,1010"/>
+    <path fill="none" stroke-width="14" d="M1432,1020 C1422,1100 1385,1190 1340,1290"/>
+    <path fill="none" stroke-width="10" d="M1100,418 C1040,402 960,420 900,445"/>
+    <path fill="none" stroke-width="42" d="M1082,445 C900,468 745,560 682,692 C615,830 592,950 652,1052 C722,1162 850,1222 950,1236"/>
+    <path fill="none" stroke-width="64" d="M650,760 C610,860 612,960 660,1040"/>
+    <path fill="none" stroke-width="40" d="M950,1236 C1100,1262 1280,1205 1372,1062"/>
+    <path fill="none" stroke-width="34" d="M1090,530 C950,540 822,640 772,762 C740,880 792,1010 882,1090 C962,1150 1100,1170 1200,1132"/>
+    <path fill="none" stroke-width="58" d="M1200,1132 C1320,1080 1390,980 1395,860 C1395,745 1330,645 1230,585 C1190,556 1135,534 1085,528"/>
+    <path fill="none" stroke-width="22" d="M1090,545 C1000,555 900,600 850,680"/>
+    <path fill="none" stroke-width="8" d="M1060,602 C960,615 880,660 830,735"/>
+    <path fill="none" stroke-width="10" d="M1195,628 C1280,670 1340,740 1395,850"/>
+    <path fill="none" stroke-width="8" d="M1330,780 C1345,830 1348,880 1345,925"/>
+    <path fill="none" stroke-width="10" d="M1425,990 C1415,1040 1400,1100 1380,1130"/>
+    <path fill="none" stroke-width="8" d="M740,830 C735,900 760,980 800,1030"/>
+    <path fill="none" stroke-width="10" d="M780,1105 C820,1140 870,1170 930,1195"/>
+    <path fill="none" stroke-width="10" d="M1130,1228 C1200,1222 1260,1200 1300,1170"/>
+    <polygon stroke="none" points="955,700 966,700 972,900 978,1050 968,1180 952,1255 944,1180 948,1000 950,850"/>
+    <polygon stroke="none" points="960,980 1018,985 1022,1150 1030,1265 944,1265 952,1150"/>
+    <path fill="none" stroke-width="58" d="M1000,738 C1090,722 1190,750 1215,835 C1235,920 1190,1010 1110,1052 C1075,1066 1040,1068 1010,1060"/>
+    <path fill="none" stroke-width="22" d="M1030,1090 C1120,1085 1210,1060 1250,1000"/>
+    <path fill="none" stroke-width="8" d="M1180,735 C1215,760 1235,790 1240,830"/>
+    <path fill="none" stroke-width="8" d="M1120,850 C1150,890 1155,930 1140,975"/>
+    <path fill="none" stroke-width="14" d="M945,828 C900,835 868,872 868,905 C868,930 880,945 893,952"/>
+    <path fill="none" stroke-width="8" d="M938,800 C890,810 850,845 842,885"/>
+    <circle cx="472" cy="434" r="6" stroke="none"/><circle cx="1205" cy="112" r="6" stroke="none"/><circle cx="1163" cy="38" r="7" stroke="none"/><circle cx="1085" cy="386" r="7" stroke="none"/><circle cx="1102" cy="388" r="5" stroke="none"/><circle cx="912" cy="975" r="6" stroke="none"/><circle cx="890" cy="965" r="5" stroke="none"/><circle cx="1030" cy="1415" r="7" stroke="none"/><circle cx="1090" cy="1435" r="6" stroke="none"/><circle cx="1112" cy="1465" r="5" stroke="none"/><circle cx="1135" cy="1495" r="6" stroke="none"/><circle cx="1228" cy="1510" r="6" stroke="none"/><circle cx="1268" cy="1560" r="6" stroke="none"/><circle cx="578" cy="1510" r="9" stroke="none"/><circle cx="578" cy="1470" r="5" stroke="none"/><circle cx="1285" cy="1270" r="5" stroke="none"/><circle cx="955" cy="1665" r="6" stroke="none"/><circle cx="1013" cy="1860" r="6" stroke="none"/>
+  </g>
+</svg>
