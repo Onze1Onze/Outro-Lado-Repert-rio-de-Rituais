@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#111113" />
     <title>Outro Lado — Repositório de Rituais</title>
+    <link rel="icon" href="./icon.svg?v=1.0.1" type="image/svg+xml" />
+    <link rel="stylesheet" href="./src/ui/styles.css?v=1.0.1" />
+    <style>
+      .load-error{margin:12px;padding:16px;border:1px solid #a53d45;background:#241316;color:#e8ded8;font:12px Arial,sans-serif}
+      .load-error h2{font:18px Georgia,serif}
+      .load-error button{padding:7px 12px;border:1px solid #85545a;color:#eee;background:#171214;cursor:pointer}
+    </style>
   </head>
   <body>
     <div id="app" class="app-shell">
@@ -17,7 +24,6 @@
         </div>
         <div class="topbar-meta"><span class="status-dot"></span><span>ÍNDICE</span></div>
       </header>
-
       <main class="main-content">
         <section class="toolbar" aria-label="Ferramentas do repositório">
           <label class="search-box" for="ritual-search">
@@ -26,20 +32,15 @@
             <kbd>/</kbd>
           </label>
           <div class="toolbar-meta">
-            <span id="result-count" class="result-count">108 REGISTROS</span>
+            <span id="result-count" class="result-count">CARREGANDO CATÁLOGO…</span>
             <button id="collapse-all" class="text-button" type="button">Recolher círculos</button>
           </div>
           <div id="element-filters" class="element-filters" aria-label="Filtrar por elemento"></div>
         </section>
-
         <div class="catalog-heading">
-          <div>
-            <p class="section-kicker">ÍNDICE DE CONJURAÇÕES</p>
-            <h2>O repositório</h2>
-          </div>
+          <div><p class="section-kicker">ÍNDICE DE CONJURAÇÕES</p><h2>O repositório</h2></div>
           <p class="catalog-scope">LIVRO-BASE + SUPLEMENTOS <span>·</span> 4 CÍRCULOS</p>
         </div>
-
         <div id="catalog" class="catalog" aria-live="polite"></div>
         <div id="empty-state" class="empty-state" hidden>
           <span class="empty-sigil" aria-hidden="true">∅</span>
@@ -47,13 +48,16 @@
           <p>Altere os termos da busca ou limpe o filtro de elemento.</p>
           <button id="clear-filters" class="outline-button" type="button">Limpar filtros</button>
         </div>
+        <div id="load-error" class="load-error" role="alert" hidden>
+          <h2>Falha ao abrir o repositório</h2>
+          <p id="load-error-message">A interface não conseguiu iniciar. Atualize a extensão e tente novamente.</p>
+          <button id="reload-app" type="button">Recarregar</button>
+        </div>
       </main>
-
       <footer class="app-footer">
         <span>OUTRO LADO <i>·</i> ARQUIVO 01</span>
-        <span id="footer-count">108 RITUAIS INDEXADOS</span>
+        <span id="footer-count">CATÁLOGO LOCAL</span>
       </footer>
-
       <section id="ritual-detail" class="detail-layer" aria-hidden="true" inert>
         <div class="detail-backdrop" data-close-detail></div>
         <article class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
@@ -65,6 +69,22 @@
         </article>
       </section>
     </div>
-    <script type="module" src="./src/main.ts"></script>
+    <script>
+      window.addEventListener("error", function (event) {
+        var box = document.getElementById("load-error");
+        if (!box) return;
+        box.hidden = false;
+        var message = document.getElementById("load-error-message");
+        if (message) message.textContent = "Erro ao iniciar a interface: " + (event.message || "falha desconhecida");
+      });
+      window.addEventListener("unhandledrejection", function (event) {
+        var box = document.getElementById("load-error");
+        if (!box) return;
+        box.hidden = false;
+        var message = document.getElementById("load-error-message");
+        if (message) message.textContent = "Falha ao carregar o catálogo: " + String(event.reason || "erro desconhecido");
+      });
+    </script>
+    <script type="module" src="./src/main.js?v=1.0.1"></script>
   </body>
 </html>
