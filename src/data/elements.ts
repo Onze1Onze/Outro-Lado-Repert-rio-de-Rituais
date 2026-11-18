@@ -11,7 +11,7 @@ export interface ElementTheme {
 export const ELEMENTS: ElementTheme[] = [
   { name: "Conhecimento", key: "knowledge", accent: "#D9B24C", icon: "conhecimento.svg" },
   { name: "Energia", key: "energy", accent: "#55DDEB", secondary: "#E477C2", icon: "energia.svg" },
-  { name: "Morte", key: "death", accent: "#08090B", icon: "morte.svg" },
+  { name: "Morte", key: "death", accent: "#55585E", icon: "morte.svg" },
   { name: "Sangue", key: "blood", accent: "#E23440", icon: "sangue.svg" },
   { name: "Medo", key: "fear", accent: "#F2F1EE", icon: "medo.svg" },
 ];
