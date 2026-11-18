@@ -196,7 +196,7 @@ function createRitualCard(ritual: Ritual, element: (typeof ELEMENTS)[number]): H
   button.innerHTML = `
     <span class="card-sigil" aria-hidden="true">${elementNames.map((name) => {
       const theme = ELEMENT_BY_NAME.get(name);
-      return theme ? `<img class="ritual-symbol" src="./assets/elements/${theme.icon}" alt="" draggable="false">` : "";
+      return theme ? `<span class="sigil-unit" data-element="${theme.key}"><img class="ritual-symbol" src="./assets/elements/${theme.icon}" alt="" draggable="false"></span>` : "";
     }).join("")}</span>
     <span class="card-copy">
       <span class="card-title">${escapeHtml(ritual.name)}</span>
@@ -254,7 +254,7 @@ function renderDetail(ritual: Ritual): void {
 
   detailContent.innerHTML = `
     <section class="detail-hero${elementNames.length > 1 ? " is-multi-element" : ""}" style="--detail-accent:${element.accent};--detail-accent-secondary:${allThemes[1]?.accent ?? element.accent}">
-      <div class="detail-symbol" aria-hidden="true">${allThemes.map((theme) => `<img src="./assets/elements/${theme.icon}" alt="" draggable="false">`).join("")}</div>
+      <div class="detail-symbol" aria-hidden="true">${allThemes.map((theme) => `<span class="detail-sigil" data-element="${theme.key}"><img src="./assets/elements/${theme.icon}" alt="" draggable="false"></span>`).join("")}</div>
       <h2 class="detail-title" id="detail-title">${escapeHtml(ritual.name)}</h2>
     </section>
     <div class="detail-meta-grid">
