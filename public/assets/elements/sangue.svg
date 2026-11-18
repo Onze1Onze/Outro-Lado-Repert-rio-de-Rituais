@@ -1,12 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 225" width="256" height="256">
-  <defs><filter id="brush" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
+  <defs>
+    <filter id="brush" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
   <g fill="#E23440" stroke="#E23440" stroke-linecap="round" stroke-linejoin="round" filter="url(#brush)">
+
+    <!-- Haste vertical -->
     <polygon stroke="none" points="104,37 111,35 113,70 114,110 115,150 116,186 101,187 102,150 101,110 102,70"/>
     <polyline fill="none" stroke-width="1.2" points="100,60 100,120 99,170"/>
+
+    <!-- Barra superior -->
     <polygon stroke="none" points="40,123 52,118 75,116 100,114 130,113 160,115 187,117 189,123 165,127 135,129 105,130 75,131 48,131"/>
     <polyline fill="none" stroke-width="1.6" points="46,119 80,115.5 120,114.5 160,116"/>
     <polyline fill="none" stroke-width="1.4" points="52,134 90,133 128,132"/>
     <polyline fill="none" stroke-width="1.2" points="150,121 184,121"/>
+
+    <!-- Barra inferior (lâmina) -->
     <polygon stroke="none" points="37,172 60,170 110,168 160,164 189,161 184,171 152,181 105,184 55,185 40,181"/>
     <polyline fill="none" stroke-width="1.6" points="44,167 100,166 150,162"/>
     <polyline fill="none" stroke-width="1.2" points="60,188 110,188 150,186"/>
