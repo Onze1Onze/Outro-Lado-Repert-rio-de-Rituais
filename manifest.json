@@ -1,0 +1,16 @@
+{
+  "name": "Outro Lado — Repositório de Rituais",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "description": "Compêndio visual de rituais de Ordem Paranormal, organizado por círculo e elemento.",
+  "author": "Onze1Onze",
+  "icon": "https://Onze1Onze.github.io/Outro-Lado-Repert-rio-de-Rituais/icon.svg",
+  "homepage_url": "https://github.com/Onze1Onze/Outro-Lado-Repert-rio-de-Rituais",
+  "action": {
+    "title": "Outro Lado — Rituais",
+    "icon": "https://Onze1Onze.github.io/Outro-Lado-Repert-rio-de-Rituais/icon.svg",
+    "popover": "https://Onze1Onze.github.io/Outro-Lado-Repert-rio-de-Rituais/extension.html",
+    "height": 820,
+    "width": 520
+  }
+}
