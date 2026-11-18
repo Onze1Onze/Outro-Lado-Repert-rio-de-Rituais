@@ -30,7 +30,31 @@ type Ritual = {
   mechanics?: RitualMechanics;
 };
 
-const rituals = catalog.rituals as Ritual[];
+type CompactRitual = { i: string; n: string; c: number; e: ElementName | ElementName[]; s: string; m?: "choice" | "dual"; v?: string; t?: string; q?: string; k?: Record<string, string> };
+const sourceNames = catalog.sources as Record<string, string>;
+const rituals = (catalog.rituals as CompactRitual[]).map((record): Ritual => {
+  const mechanics = record.k;
+  return {
+    id: record.i, name: record.n, circle: record.c,
+    ...(Array.isArray(record.e) ? { elements: record.e } : { element: record.e }),
+    ...(record.m ? { elementMode: record.m } : {}),
+    source: sourceNames[record.s] ?? record.s, sourceScope: record.s,
+    ...(record.v ? { verification: record.v } : {}),
+    ...(record.t ? { variantNote: record.t } : {}),
+    ...(record.q ? { sourceNote: record.q } : {}),
+    ...(mechanics ? { mechanics: {
+      ...(mechanics.x ? { execution: mechanics.x } : {}),
+      ...(mechanics.r ? { range: mechanics.r } : {}),
+      ...(mechanics.a ? { target: mechanics.a } : {}),
+      ...(mechanics.d ? { duration: mechanics.d } : {}),
+      ...(mechanics.s ? { resistance: mechanics.s } : {}),
+      ...(mechanics.p ? { description: mechanics.p } : {}),
+      ...(mechanics.e ? { effects: mechanics.e } : {}),
+      ...(mechanics.i ? { improvements: mechanics.i } : {}),
+      ...(mechanics.o ? { extra: mechanics.o } : {}),
+    } } : {}),
+  };
+});
 
 function requireNode<T extends Element>(selector: string): T {
   const node = document.querySelector<T>(selector);
