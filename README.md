@@ -93,3 +93,15 @@ Arquivo-fonte do manifesto no GitHub:
 ## Integridade dos dados
 
 Execute `npm run validate:data` depois de editar `src/data/rituals.json`. A validação verifica o número de cartões únicos, os cinco elementos, os quatro círculos, IDs e nomes não duplicados, regras de elemento simples/múltiplo e marcação explícita de fontes secundárias. A contagem de 85 entradas do livro-base é distinta dos 82 cartões únicos por causa da escolha de elemento de *Amaldiçoar Arma*.
+
+
+## Interface 1.0.2 — símbolos elementais
+
+Os cinco SVGs enviados para esta versão estão em `public/assets/elements/` e são carregados localmente no popover:
+- `conhecimento.svg` — dourado;
+- `energia.svg` — ciano com acento rosa;
+- `morte.svg` — preto, com superfície clara para manter contraste;
+- `sangue.svg` — vermelho;
+- `medo.svg` — branco.
+
+A bandeja não utiliza mais cabeçalho ornamental, rodapé de status, descrições decorativas dos elementos ou texturas repetidas. Busca, filtros, agrupamento por círculo/elemento e fichas dos rituais permanecem disponíveis.
