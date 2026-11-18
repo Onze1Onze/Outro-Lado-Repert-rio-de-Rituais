@@ -61,9 +61,9 @@ Requisitos: Node.js 22 ou compatível e npm.
 
 O workflow em `.github/workflows/deploy.yml` constrói o projeto e publica `dist/` no GitHub Pages em cada push para `main`. **Configuração inicial necessária:** abra `Settings → Pages` no repositório, em `Build and deployment` selecione `GitHub Actions` como `Source` e salve. A conexão GitHub usada para o workflow não tem permissão administrativa para criar o site Pages automaticamente; depois de habilitá-lo nas configurações, abra `Actions` e execute novamente `Build and deploy Owlbear extension`. A compilação Vite e o typecheck já passaram; a publicação fica pendente dessa ativação.
 
-Manifesto para instalação/atualização no Owlbear Rodeo (versão 1.0.1, com cache-busting):
+Manifesto para instalação/atualização no Owlbear Rodeo (versão 1.0.4):
 
-`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.1`
+`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.4`
 
 Arquivo-fonte do manifesto no GitHub:
 
@@ -108,3 +108,10 @@ A bandeja não utiliza mais cabeçalho ornamental, rodapé de status, descriçõ
 
 
 The five SVGs in `public/assets/elements/` now preserve the vector geometry of the five SVG files supplied with the request. Only the non-rendering embedded provenance metadata was removed and their strokes/fills were recolored for the requested elemental palette. The popover uses versioned asset URLs to avoid reusing older cached icons.
+
+
+## Correção de inicialização 1.0.4
+
+Os 108 cartões são pré-renderizados diretamente em `extension.html`, e os dados estruturados também ficam embutidos no documento. O popover não faz uma requisição separada para o JSON e não usa importação de JSON com import attributes. Isso permite mostrar o catálogo imediatamente e mantém os cartões visíveis mesmo se o JavaScript que ativa busca, filtros e fichas falhar.
+
+A inicialização também não depende mais do elemento `#footer-count`, que havia sido removido durante a simplificação da interface. A versão 1.0.4 foi validada verificando os 108 cartões pré-renderizados, os quatro círculos, os cinco elementos, a existência de todos os seletores DOM exigidos e a ausência de dependências de importação de JSON.
