@@ -118,7 +118,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #e2c66f;outline-offse
 .detail-source{margin-top:17px;padding-top:9px;border-top:1px solid #38353a;color:#aaa19b;font:10px/1.4 Arial,sans-serif}
 
 .filter-chip[data-filter-element="Energia"]{border-color:var(--energy-pink);box-shadow:inset 0 -2px 0 var(--energy)}
-.filter-chip[data-filter-element="Energia"]:hover,.filter-chip[data-filter-element="Energia"][aria-pressed=true){background:linear-gradient(105deg,color-mix(in srgb,var(--energy-pink) 14%,#1b1a1d),color-mix(in srgb,var(--energy) 14%,#1b1a1d))}
+.filter-chip[data-filter-element="Energia"]:hover,.filter-chip[data-filter-element="Energia"][aria-pressed=true]{background:linear-gradient(105deg,color-mix(in srgb,var(--energy-pink) 14%,#1b1a1d),color-mix(in srgb,var(--energy) 14%,#1b1a1d))}
 .detail-hero.is-multi-element .detail-symbol img{width:29px;height:29px}
 @media(max-width:370px){
   .toolbar{padding:8px 9px}
