@@ -63,7 +63,7 @@ O workflow em `.github/workflows/deploy.yml` constrói o projeto e publica `dist
 
 Manifesto para instalação/atualização no Owlbear Rodeo (versão 1.0.4):
 
-`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.8`
+`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.9`
 
 Arquivo-fonte do manifesto no GitHub:
 
@@ -127,3 +127,8 @@ Morte foi padronizada em cinza-escuro (`#55585E`) no SVG, nos tokens de cor, nos
 ## Correção de interface 1.0.8
 
 A folha de estilos completa do popover foi reconstruída após uma regressão que havia removido os estilos de agrupamento, cartões e dimensões dos símbolos. O catálogo volta a exibir cabeçalhos de círculos, seções elementais e cartões quadrados com dimensões máximas explícitas para os SVGs. O layout usa duas colunas em popovers estreitos e até quatro em áreas mais largas. Morte permanece em cinza-escuro.
+
+
+### Correção de layout 1.0.9
+
+Reforçadas as dimensões máximas de todas as imagens dos símbolos para impedir que qualquer SVG use suas dimensões intrínsecas e ultrapasse o cartão.
