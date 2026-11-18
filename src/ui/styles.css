@@ -64,6 +64,12 @@ button:focus-visible,input:focus-visible{outline:2px solid #e2c66f;outline-offse
 .ritual-card:active{background:color-mix(in srgb,var(--element-accent) 15%,#111113)}
 .ritual-card.is-multi-element{border-right:3px solid var(--element-accent-secondary,var(--element-accent))}
 .card-sigil{display:flex;align-items:center;justify-content:flex-start;gap:3px;width:100%;height:36px;min-height:36px}
+.sigil-unit{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border:1px solid color-mix(in srgb,var(--element-accent) 48%,#39363a);background:color-mix(in srgb,var(--element-accent) 9%,#111113)}
+.sigil-unit img{display:block;width:29px;height:29px;object-fit:contain}
+.sigil-unit[data-element="death"]{background:#efeeec;border-color:#888}
+.ritual-card.is-multi-element .sigil-unit{width:25px;height:25px;flex-basis:25px}
+.ritual-card.is-multi-element .sigil-unit img{width:21px;height:21px}
+
 .ritual-symbol{display:block;width:34px;height:34px;object-fit:contain;flex:0 0 34px}
 .ritual-card.is-multi-element .ritual-symbol{width:25px;height:25px;flex-basis:25px}
 .card-copy{display:block;min-width:0;width:100%}
@@ -103,8 +109,12 @@ button:focus-visible,input:focus-visible{outline:2px solid #e2c66f;outline-offse
 .detail-content{min-height:0;flex:1;overflow-y:auto;padding:12px 13px 20px;scrollbar-width:thin;scrollbar-color:#555156 transparent}
 .detail-hero{display:flex;align-items:center;gap:12px;padding:10px 11px;border:1px solid color-mix(in srgb,var(--detail-accent) 58%,#343236);background:#1c1b1e}
 .detail-symbol{display:flex;align-items:center;justify-content:flex-start;gap:4px;min-width:48px;min-height:48px;max-width:130px;padding:3px;border:1px solid color-mix(in srgb,var(--detail-accent) 60%,transparent);background:color-mix(in srgb,var(--detail-accent) 9%,#111113)}
+.detail-sigil{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;border:1px solid #555;background:#202023}
+.detail-sigil img{display:block;width:38px;height:38px;object-fit:contain}
+.detail-sigil[data-element="death"]{background:#efeeec;border-color:#888}
+
 .detail-symbol img{display:block;width:40px;height:40px;object-fit:contain}
-.detail-layer[data-element="death"] .detail-symbol{background:#efeeec;border-color:#888}
+.detail-layer[data-element="death"] .detail-symbol{background:#efeeec;border-color:#888}.detail-layer[data-element="death"] .detail-hero{background:#c9c7c5;border-color:#777}.detail-layer[data-element="death"] .detail-title{color:#08090b}
 .detail-title{margin:0;color:#f2eee9;font:600 clamp(19px,5vw,25px)/1.12 Georgia,"Times New Roman",serif;overflow-wrap:anywhere}
 .detail-layer[data-element="death"] .detail-title{color:#111}
 .detail-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:12px 0 16px}
@@ -119,7 +129,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #e2c66f;outline-offse
 
 .filter-chip[data-filter-element="Energia"]{border-color:var(--energy-pink);box-shadow:inset 0 -2px 0 var(--energy)}
 .filter-chip[data-filter-element="Energia"]:hover,.filter-chip[data-filter-element="Energia"][aria-pressed=true]{background:linear-gradient(105deg,color-mix(in srgb,var(--energy-pink) 14%,#1b1a1d),color-mix(in srgb,var(--energy) 14%,#1b1a1d))}
-.detail-hero.is-multi-element .detail-symbol img{width:29px;height:29px}
+.detail-hero.is-multi-element .detail-sigil img{width:29px;height:29px}
 @media(max-width:370px){
   .toolbar{padding:8px 9px}
   .filter-chip{gap:4px;padding:4px 5px;font-size:9px}
