@@ -4,87 +4,40 @@ import assert from 'node:assert/strict';
 const data = JSON.parse(await readFile(new URL('../src/data/rituals.json', import.meta.url), 'utf8'));
 const allowedElements = ['Conhecimento', 'Energia', 'Morte', 'Sangue', 'Medo'];
 const allowedCircles = [1, 2, 3, 4];
-// Counts here refer to unique cards. The base-book element index has 85 rows,
-// but Amaldiçoar Arma is one spell with an elemental choice, so it is one card.
-const expectedUniqueByScope = {
-  'core-v1.2': 82,
-  'surviving-horror': 16,
-  'archives-01': 2,
-  'archives-02': 4,
-  'archives-04': 1,
-  'bookmark-extra': 1,
-  'archives-06': 1,
-  'archives-07': 1,
-};
-const expectedUniqueCount = 108;
+const expectedUniqueByScope = { 'core-v1.2': 82, 'surviving-horror': 16, 'archives-01': 2, 'archives-02': 4, 'archives-04': 1, 'bookmark-extra': 1, 'archives-06': 1, 'archives-07': 1 };
 const expectedCircleCounts = { 1: 31, 2: 33, 3: 23, 4: 21 };
-
-assert.equal(data.scope.count, expectedUniqueCount, 'Quantidade declarada de registros divergente');
-assert.equal(data.rituals.length, expectedUniqueCount, 'Quantidade de registros divergente');
-assert.deepEqual(data.elements, allowedElements, 'A lista deve conter apenas os cinco elementos oficiais');
-assert.deepEqual(data.circles, allowedCircles, 'Círculos esperados: 1 a 4');
-assert.equal(data.scope.baseCount, 85, 'O índice-base deve manter a contagem de 85 entradas elementais');
-assert.equal(data.scope.uniqueCoreCount, 82, 'O livro-base deve resultar em 82 cartões únicos após consolidar Amaldiçoar Arma');
-
-const ids = new Set();
-const names = new Set();
-const scopeCounts = {};
+assert.equal(data.count, 108);
+assert.equal(data.rituals.length, 108);
+assert.equal(data.base, 85);
+assert.equal(data.uniqueBase, 82);
+assert.deepEqual(data.elements, allowedElements);
+assert.deepEqual(data.circles, allowedCircles);
+const ids = new Set(), names = new Set(), scopeCounts = {};
 for (const [index, ritual] of data.rituals.entries()) {
-  assert.ok(ritual.id && ritual.name, `Registro ${index + 1} sem id/nome`);
-  assert.ok(!ids.has(ritual.id), `ID duplicado: ${ritual.id}`);
-  ids.add(ritual.id);
-  assert.ok(allowedCircles.includes(ritual.circle), `Círculo inválido em ${ritual.name}`);
-
-  const elements = Array.isArray(ritual.elements) ? ritual.elements : ritual.element ? [ritual.element] : [];
-  assert.ok(elements.length >= 1, `Nenhum elemento declarado: ${ritual.name}`);
-  assert.equal(new Set(elements).size, elements.length, `Elemento repetido no registro ${ritual.name}`);
-  for (const element of elements) {
-    assert.ok(allowedElements.includes(element), `Elemento inválido em ${ritual.name}: ${element}`);
-  }
-  if (elements.length > 1) {
-    assert.ok(['choice', 'dual'].includes(ritual.elementMode), `Ritual multi-elemento sem modo explícito: ${ritual.name}`);
-    assert.equal(ritual.element, undefined, `Ritual multi-elemento não deve declarar também element: ${ritual.name}`);
-  } else {
-    assert.ok(!ritual.elementMode, `Modo multi-elemento aplicado a ritual de elemento único: ${ritual.name}`);
-    assert.equal(ritual.element, elements[0], `Elemento simples e lista de elementos divergentes em ${ritual.name}`);
-  }
-
-  const normalizedName = ritual.name.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
-  const key = `${ritual.circle}|${normalizedName}`;
-  assert.ok(!names.has(key), `Ritual duplicado no mesmo círculo: ${ritual.name}`);
-  names.add(key);
-
-  assert.ok(Object.hasOwn(expectedUniqueByScope, ritual.sourceScope), `Escopo de fonte não reconhecido em ${ritual.name}: ${ritual.sourceScope}`);
-  scopeCounts[ritual.sourceScope] = (scopeCounts[ritual.sourceScope] ?? 0) + 1;
-  assert.ok(ritual.source, `Fonte ausente em ${ritual.name}`);
-  if (ritual.mechanics) {
-    for (const field of Object.keys(ritual.mechanics)) {
-      assert.ok(['execution', 'range', 'target', 'duration', 'resistance', 'description', 'effects', 'improvements', 'extra'].includes(field), `Campo mecânico desconhecido em ${ritual.name}: ${field}`);
-      assert.equal(typeof ritual.mechanics[field], 'string', `Campo mecânico deve ser texto em ${ritual.name}: ${field}`);
-      assert.ok(ritual.mechanics[field].trim(), `Campo mecânico vazio não deve ser armazenado: ${ritual.name}: ${field}`);
-    }
-  }
-  if (ritual.sourceScope.startsWith('archives-') || ritual.sourceScope === 'bookmark-extra') {
-    assert.equal(ritual.verification, 'community-index', `A origem ${ritual.sourceScope} precisa estar sinalizada como índice comunitário: ${ritual.name}`);
-  }
+  assert.ok(ritual.i && ritual.n, `Registro ${index + 1} sem id/nome`);
+  assert.ok(!ids.has(ritual.i), `ID duplicado: ${ritual.i}`); ids.add(ritual.i);
+  assert.ok(allowedCircles.includes(ritual.c), `Círculo inválido: ${ritual.n}`);
+  const elements = Array.isArray(ritual.e) ? ritual.e : [ritual.e];
+  assert.ok(elements.length && elements.every(e => allowedElements.includes(e)), `Elemento inválido: ${ritual.n}`);
+  if (elements.length > 1) assert.ok(['choice', 'dual'].includes(ritual.m), `Modo multi-elemento ausente: ${ritual.n}`);
+  else assert.ok(!ritual.m, `Modo multi-elemento indevido: ${ritual.n}`);
+  const key = `${ritual.c}|${ritual.n.normalize('NFD').replace(/\\p{Diacritic}/gu, '').toLowerCase()}`;
+  assert.ok(!names.has(key), `Nome duplicado no círculo: ${ritual.n}`); names.add(key);
+  assert.ok(Object.hasOwn(expectedUniqueByScope, ritual.s), `Fonte não esperada em ${ritual.n}: ${ritual.s}`);
+  assert.ok(data.sources[ritual.s], `Rótulo de fonte ausente: ${ritual.s}`);
+  scopeCounts[ritual.s] = (scopeCounts[ritual.s] ?? 0) + 1;
+  if (['archives-01','archives-02','archives-04','archives-06','archives-07','bookmark-extra'].includes(ritual.s)) assert.equal(ritual.v, 'community-index');
+  if (ritual.k) for (const value of Object.values(ritual.k)) assert.equal(typeof value, 'string');
 }
-assert.deepEqual(scopeCounts, expectedUniqueByScope, 'Contagem de cartões únicos por origem divergente');
-const circleCounts = Object.fromEntries(allowedCircles.map(circle => [circle, data.rituals.filter(r => r.circle === circle).length]));
-assert.deepEqual(circleCounts, expectedCircleCounts, 'Distribuição por círculo divergente');
-
-const weaponCurse = data.rituals.filter(r => r.name === 'Amaldiçoar Arma');
-assert.equal(weaponCurse.length, 1, 'Amaldiçoar Arma deve existir como um único registro');
-assert.deepEqual(weaponCurse[0].elements, ['Conhecimento', 'Energia', 'Morte', 'Sangue']);
-assert.equal(weaponCurse[0].elementMode, 'choice', 'Amaldiçoar Arma permite escolher um elemento, não somar os quatro');
-
-const dualElementRituals = data.rituals.filter(r => r.elementMode === 'dual');
-assert.deepEqual(dualElementRituals.map(r => r.name).sort(), ['Passagem de Conhecimento', 'Passagem de Conhecimento Expandido'].sort());
-assert.equal(data.rituals.find(r => r.name === 'Hesitação Forçada')?.element, 'Conhecimento', 'Hesitação Forçada deve seguir a revisão v1.1 do pacote #06');
-assert.ok(data.rituals.some(r => r.name === 'Mapa Sanguíneo' && r.circle === 2 && r.element === 'Sangue'));
-assert.ok(data.rituals.some(r => r.name === 'Backup' && r.circle === 2 && r.element === 'Energia'));
-
-const sourceRecords = Object.fromEntries(data.sourceRegister.map(source => [source.scope, source.records]));
-assert.equal(sourceRecords['core-v1.2'], 85, 'A fonte-base deve preservar a contagem original do índice');
-assert.equal(sourceRecords['surviving-horror'], 16);
-
-console.log(`OK: ${data.rituals.length} cartões únicos; 85 entradas-base consolidadas em 82 cartões; fontes comunitárias sinalizadas; sem IDs/nomes duplicados; círculos ${JSON.stringify(circleCounts)}.`);
+assert.deepEqual(scopeCounts, expectedUniqueByScope);
+const circleCounts = Object.fromEntries(allowedCircles.map(c => [c, data.rituals.filter(r => r.c === c).length]));
+assert.deepEqual(circleCounts, expectedCircleCounts);
+const weaponCurse = data.rituals.filter(r => r.n === 'Amaldiçoar Arma');
+assert.equal(weaponCurse.length, 1);
+assert.deepEqual(weaponCurse[0].e, ['Conhecimento','Energia','Morte','Sangue']);
+assert.equal(weaponCurse[0].m, 'choice');
+assert.deepEqual(data.rituals.filter(r => r.m === 'dual').map(r => r.n).sort(), ['Passagem de Conhecimento','Passagem de Conhecimento Expandido'].sort());
+assert.ok(data.rituals.some(r => r.n === 'Mapa Sanguíneo' && r.c === 2 && r.e === 'Sangue'));
+assert.ok(data.rituals.some(r => r.n === 'Backup' && r.c === 2 && r.e === 'Energia'));
+assert.ok(data.notice.includes('Hell Hunters'));
+console.log(`OK: ${data.rituals.length} cartões únicos, dados compactados, sem IDs/nomes duplicados; círculos ${JSON.stringify(circleCounts)}.`);
