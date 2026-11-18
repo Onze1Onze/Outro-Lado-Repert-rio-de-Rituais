@@ -67,6 +67,7 @@ img{max-width:100%;vertical-align:middle}
 .card-sigil{display:flex;align-items:center;justify-content:flex-start;gap:4px;width:100%;height:38px;min-height:38px;max-height:38px;overflow:hidden}
 .sigil-unit{display:grid;place-items:center;width:34px;height:34px;min-width:0;flex:0 1 34px;padding:2px;overflow:hidden;border:1px solid color-mix(in srgb,var(--element-accent) 48%,#39363A);background:color-mix(in srgb,var(--element-accent) 9%,#111113)}
 .sigil-unit img{display:block;width:28px;height:28px;max-width:28px;max-height:28px;object-fit:contain}
+.ritual-symbol{display:block;width:28px;height:28px;max-width:28px;max-height:28px;object-fit:contain}
 .ritual-card.is-multi-element .sigil-unit{width:25px;height:25px;flex-basis:25px}
 .ritual-card.is-multi-element .sigil-unit img{width:20px;height:20px;max-width:20px;max-height:20px}
 .card-copy{display:block;width:100%;min-width:0;overflow:hidden}
