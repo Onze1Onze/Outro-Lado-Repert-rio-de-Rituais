@@ -70,6 +70,7 @@ function makeCard(ritual, theme) {
   const button = document.createElement("button");
   button.type = "button"; button.className = "ritual-card"; button.dataset.ritualId = ritual.id; button.dataset.element = theme.key;
   button.style.setProperty("--element-accent", theme.accent);
+  if (theme.secondary) button.style.setProperty("--element-accent-secondary", theme.secondary);
   if (ritual.elements.length > 1) {
     button.classList.add("is-multi-element");
     const secondary = BY_NAME.get(ritual.elements[1]);
@@ -117,6 +118,7 @@ function renderCatalog() {
       if (!group.length) return;
       const groupNode = document.createElement("section"); groupNode.className = "element-section";
       groupNode.dataset.element = element.key; groupNode.style.setProperty("--element-accent", element.accent);
+      if (element.secondary) groupNode.style.setProperty("--element-accent-secondary", element.secondary);
       groupNode.innerHTML = '<header class="element-heading"><span class="element-sigil" aria-hidden="true"><img src="./assets/elements/' + element.icon + '" alt="" draggable="false"></span>' +
         '<h3 class="element-name">' + esc(element.name) + '</h3>' +
         '<span class="element-total">' + group.length + '</span></header><div class="ritual-grid"></div>';
@@ -139,6 +141,7 @@ function renderDetail(ritual) {
     .concat(contentFields.filter(function (item) { return !k[item[1]]; }).map(function (item) { return item[0]; }));
   const verification = ritual.verification === "community-index" ? "referência comunitária" :
     (ritual.verification === "official-source" || ritual.verification === "official-index" ? "referência oficial" : "classificação indexada");
+  ui.detail.dataset.element = theme.key;
   ui.detail.style.setProperty("--detail-accent", theme.accent);
   ui.detail.style.setProperty("--detail-accent-secondary", themes[1] ? themes[1].accent : theme.accent);
   const meta = '<div class="detail-meta-grid"><div class="detail-meta-card"><span class="detail-meta-label">CÍRCULO</span><span class="detail-meta-value">' + ritual.circle + 'º</span></div>' +
