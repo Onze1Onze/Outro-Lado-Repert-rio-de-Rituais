@@ -51,10 +51,13 @@ let selectedElement = null, query = "", collapsed = false, activeRitual = null, 
 function esc(value) { return String(value == null ? "" : value).replace(/[&<>\"']/g, function (ch) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[ch]; }); }
 function elementLabel(ritual) { return ritual.mode === "choice" ? "Escolha: " + ritual.elements.join(" / ") : ritual.elements.join(" + "); }
 function themeOf(ritual) { return BY_NAME.get(ritual.elements[0]); }
+function normalizeSearch(value) {
+  return String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
+}
 function filtered(ritual) {
   const elementOk = !selectedElement || ritual.elements.includes(selectedElement);
-  const term = query.trim().toLocaleLowerCase("pt-BR");
-  const content = (ritual.name + " " + ritual.elements.join(" ") + " " + ritual.circle + " " + CIRCLES[ritual.circle]).toLocaleLowerCase("pt-BR");
+  const term = normalizeSearch(query.trim());
+  const content = normalizeSearch(ritual.name + " " + ritual.elements.join(" ") + " " + ritual.circle + " " + CIRCLES[ritual.circle]);
   return elementOk && (!term || content.includes(term));
 }
 function renderFilters() {
