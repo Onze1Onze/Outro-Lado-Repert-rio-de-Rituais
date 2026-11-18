@@ -59,7 +59,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #e2c66f;outline-offse
 .element-name{margin:0;color:var(--element-accent);font:600 13px Georgia,"Times New Roman",serif;letter-spacing:.03em}
 .element-total{margin-left:auto;color:#aaa29c;font:10px Arial,sans-serif}
 .ritual-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(142px,1fr));gap:7px}
-.ritual-card{--element-accent:#aaa;position:relative;min-width:0;min-height:126px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:7px;padding:9px;border:1px solid color-mix(in srgb,var(--element-accent) 44%,#39363a);color:#eae5df;background:#111113;text-align:left;cursor:pointer;overflow:hidden;transition:border-color .14s,background .14s}
+.ritual-card{--element-accent:#aaa;position:relative;min-width:0;min-height:126px;aspect-ratio:1 / 1;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:7px;padding:9px;border:1px solid color-mix(in srgb,var(--element-accent) 44%,#39363a);color:#eae5df;background:#111113;text-align:left;cursor:pointer;overflow:hidden;transition:border-color .14s,background .14s}
 .ritual-card:hover{border-color:var(--element-accent);background:color-mix(in srgb,var(--element-accent) 9%,#111113)}
 .ritual-card:active{background:color-mix(in srgb,var(--element-accent) 15%,#111113)}
 .ritual-card.is-multi-element{border-right:3px solid var(--element-accent-secondary,var(--element-accent))}
