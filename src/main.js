@@ -79,7 +79,7 @@ function makeCard(ritual, theme) {
   button.setAttribute("aria-label", ritual.name + ", " + ritual.circle + "º círculo, " + elementLabel(ritual) + ". Abrir ficha.");
   button.innerHTML = '<span class="card-sigil" aria-hidden="true">' + ritual.elements.map(function (name) {
       const symbolTheme = BY_NAME.get(name);
-      return '<img class="ritual-symbol" src="./assets/elements/' + symbolTheme.icon + '" alt="" draggable="false">';
+      return '<span class="sigil-unit" data-element="' + symbolTheme.key + '"><img class="ritual-symbol" src="./assets/elements/' + symbolTheme.icon + '" alt="" draggable="false"></span>';
     }).join("") + '</span>' +
     '<span class="card-copy"><span class="card-title">' + esc(ritual.name) + '</span>' +
     '<span class="card-subtitle">' + ritual.circle + 'º · ' + esc(elementLabel(ritual)) + '</span></span>' +
@@ -155,7 +155,7 @@ function renderDetail(ritual) {
   const pending = missing.length ? '<section class="detail-section"><h3>Dados ainda não cadastrados</h3><div class="detail-missing"><strong>Campos pendentes</strong><br>' +
     esc(missing.join(" · ")) + '. Nenhuma informação foi inferida ou inventada; os campos permanecem vazios até conferência na fonte correspondente.</div></section>' : "";
   ui.detailContent.innerHTML = '<section class="detail-hero' + (themes.length > 1 ? " is-multi-element" : "") + '" style="--detail-accent:' + theme.accent + ';--detail-accent-secondary:' + (themes[1] ? themes[1].accent : theme.accent) + '">' +
-    '<div class="detail-symbol" aria-hidden="true">' + themes.map(function (item) { return '<img src="./assets/elements/' + item.icon + '" alt="" draggable="false">'; }).join("") + '</div>' +
+    '<div class="detail-symbol" aria-hidden="true">' + themes.map(function (item) { return '<span class="detail-sigil" data-element="' + item.key + '"><img src="./assets/elements/' + item.icon + '" alt="" draggable="false"></span>'; }).join("") + '</div>' +
     '<h2 class="detail-title" id="detail-title">' + esc(ritual.name) + '</h2></section>' + meta + param + paragraphs + pending +
     (ritual.note ? '<section class="detail-section"><h3>Nota do índice</h3><div class="detail-missing">' + esc(ritual.note) + '</div></section>' : "") +
     (ritual.sourceNote ? '<section class="detail-section"><h3>Nota de verificação</h3><div class="detail-missing">' + esc(ritual.sourceNote) + '</div></section>' : "") +
