@@ -73,7 +73,7 @@ function filtered(ritual) {
 function renderFilters() {
   ui.filters.innerHTML = ELEMENTS.map(function (element) {
     return '<button class="filter-chip" type="button" data-filter-element="' + esc(element.name) + '" aria-pressed="' + (selectedElement === element.name) + '" style="--element-accent:' + element.accent + '">' +
-      '<img class="filter-icon" src="' + sigilUrl(element.key) + ' + '" alt="" draggable="false"><span>' + esc(element.name) + '</span></button>';
+      '<img class="filter-icon" src="' + sigilUrl(element.key) + '" alt="" draggable="false"><span>' + esc(element.name) + '</span></button>';
   }).join("");
 }
 function makeCard(ritual, theme) {
@@ -89,7 +89,7 @@ function makeCard(ritual, theme) {
   button.setAttribute("aria-label", ritual.name + ", " + ritual.circle + "º círculo, " + elementLabel(ritual) + ". Abrir ficha.");
   button.innerHTML = '<span class="card-sigil" aria-hidden="true">' + ritual.elements.map(function (name) {
       const symbolTheme = BY_NAME.get(name);
-      return '<span class="sigil-unit" data-element="' + symbolTheme.key + '"><img class="ritual-symbol" src="' + sigilUrl(symbolTheme.key) + ' + '" alt="" draggable="false"></span>';
+      return '<span class="sigil-unit" data-element="' + symbolTheme.key + '"><img class="ritual-symbol" src="' + sigilUrl(symbolTheme.key) + '" alt="" draggable="false"></span>';
     }).join("") + '</span>' +
     '<span class="card-copy"><span class="card-title">' + esc(ritual.name) + '</span>' +
     '<span class="card-subtitle">' + ritual.circle + 'º · ' + esc(elementLabel(ritual)) + '</span></span>' +
@@ -128,7 +128,7 @@ function renderCatalog() {
       const groupNode = document.createElement("section"); groupNode.className = "element-section";
       groupNode.dataset.element = element.key; groupNode.style.setProperty("--element-accent", element.accent);
       if (element.secondary) groupNode.style.setProperty("--element-accent-secondary", element.secondary);
-      groupNode.innerHTML = '<header class="element-heading"><span class="element-sigil" aria-hidden="true"><img src="' + sigilUrl(element.key) + ' + '" alt="" draggable="false"></span>' +
+      groupNode.innerHTML = '<header class="element-heading"><span class="element-sigil" aria-hidden="true"><img src="' + sigilUrl(element.key) + '" alt="" draggable="false"></span>' +
         '<h3 class="element-name">' + esc(element.name) + '</h3>' +
         '<span class="element-total">' + group.length + '</span></header><div class="ritual-grid"></div>';
       const grid = groupNode.querySelector(".ritual-grid");
@@ -164,7 +164,7 @@ function renderDetail(ritual) {
   const pending = missing.length ? '<section class="detail-section"><h3>Dados ainda não cadastrados</h3><div class="detail-missing"><strong>Campos pendentes</strong><br>' +
     esc(missing.join(" · ")) + '. Nenhuma informação foi inferida ou inventada; os campos permanecem vazios até conferência na fonte correspondente.</div></section>' : "";
   ui.detailContent.innerHTML = '<section class="detail-hero' + (themes.length > 1 ? " is-multi-element" : "") + '" style="--detail-accent:' + theme.accent + ';--detail-accent-secondary:' + (themes[1] ? themes[1].accent : theme.accent) + '">' +
-    '<div class="detail-symbol" aria-hidden="true">' + themes.map(function (item) { return '<span class="detail-sigil" data-element="' + item.key + '"><img src="' + sigilUrl(item.key) + ' + '" alt="" draggable="false"></span>'; }).join("") + '</div>' +
+    '<div class="detail-symbol" aria-hidden="true">' + themes.map(function (item) { return '<span class="detail-sigil" data-element="' + item.key + '"><img src="' + sigilUrl(item.key) + '" alt="" draggable="false"></span>'; }).join("") + '</div>' +
     '<h2 class="detail-title" id="detail-title">' + esc(ritual.name) + '</h2></section>' + meta + param + paragraphs + pending +
     (ritual.note ? '<section class="detail-section"><h3>Nota do índice</h3><div class="detail-missing">' + esc(ritual.note) + '</div></section>' : "") +
     (ritual.sourceNote ? '<section class="detail-section"><h3>Nota de verificação</h3><div class="detail-missing">' + esc(ritual.sourceNote) + '</div></section>' : "") +
