@@ -1,4 +1,6 @@
-import catalog from "./data/rituals.json" with { type: "json" };
+const dataNode = document.getElementById("ritual-data");
+if (!dataNode) throw new Error("Dados locais do catálogo não encontrados.");
+const catalog = JSON.parse(dataNode.textContent);
 
 const ELEMENTS = [
   { name: "Conhecimento", key: "knowledge", accent: "#D9B24C", icon: "conhecimento.svg" },
@@ -14,7 +16,7 @@ const raw = Array.isArray(catalog) ? catalog : catalog.rituals;
 function node(selector) { const found = document.querySelector(selector); if (!found) throw new Error("Elemento ausente: " + selector); return found; }
 const ui = {
   catalog: node("#catalog"), search: node("#ritual-search"), filters: node("#element-filters"),
-  count: node("#result-count"), footer: node("#footer-count"), empty: node("#empty-state"),
+  count: node("#result-count"), empty: node("#empty-state"),
   detail: node("#ritual-detail"), detailContent: node("#detail-content"), close: node("#close-detail"),
   collapse: node("#collapse-all"), clear: node("#clear-filters"), error: node("#load-error")
 };
@@ -95,7 +97,6 @@ function updateCollapseLabel() {
 function renderCatalog() {
   const records = rituals.filter(filtered);
   ui.count.textContent = records.length + (records.length === 1 ? " REGISTRO" : " REGISTROS");
-  ui.footer.textContent = rituals.length + " RITUAIS INDEXADOS";
   ui.catalog.replaceChildren(); ui.empty.hidden = records.length > 0;
   [1, 2, 3, 4].forEach(function (circle) {
     const circleRecords = records.filter(function (ritual) { return ritual.circle === circle; });
