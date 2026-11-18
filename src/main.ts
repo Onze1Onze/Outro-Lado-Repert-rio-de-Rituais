@@ -66,7 +66,6 @@ const catalogNode = requireNode<HTMLDivElement>("#catalog");
 const searchInput = requireNode<HTMLInputElement>("#ritual-search");
 const filtersNode = requireNode<HTMLDivElement>("#element-filters");
 const resultCount = requireNode<HTMLSpanElement>("#result-count");
-const footerCount = requireNode<HTMLSpanElement>("#footer-count");
 const emptyState = requireNode<HTMLDivElement>("#empty-state");
 const detailLayer = requireNode<HTMLElement>("#ritual-detail");
 const detailContent = requireNode<HTMLDivElement>("#detail-content");
@@ -122,7 +121,6 @@ function renderFilters(): void {
 function renderCatalog(): void {
   const filtered = rituals.filter(matchesFilters);
   resultCount.textContent = `${filtered.length} ${filtered.length === 1 ? "REGISTRO" : "REGISTROS"}`;
-  footerCount.textContent = `${rituals.length} RITUAIS INDEXADOS`;
   catalogNode.innerHTML = "";
   emptyState.hidden = filtered.length > 0;
 
@@ -188,6 +186,7 @@ function createRitualCard(ritual: Ritual, element: (typeof ELEMENTS)[number]): H
   button.dataset.ritualId = ritual.id;
   button.dataset.element = element.key;
   button.style.setProperty("--element-accent", element.accent);
+  if (element.secondary) button.style.setProperty("--element-accent-secondary", element.secondary);
   const elementLabel = getElementLabel(ritual);
   const elementNames = getRitualElements(ritual);
   button.classList.toggle("is-multi-element", elementNames.length > 1);
