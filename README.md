@@ -63,7 +63,7 @@ O workflow em `.github/workflows/deploy.yml` constrói o projeto e publica `dist
 
 Manifesto para instalação/atualização no Owlbear Rodeo (versão 1.0.4):
 
-`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.4`
+`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.7`
 
 Arquivo-fonte do manifesto no GitHub:
 
@@ -115,3 +115,10 @@ The five SVGs in `public/assets/elements/` now preserve the vector geometry of t
 Os 108 cartões são pré-renderizados diretamente em `extension.html`, e os dados estruturados também ficam embutidos no documento. O popover não faz uma requisição separada para o JSON e não usa importação de JSON com import attributes. Isso permite mostrar o catálogo imediatamente e mantém os cartões visíveis mesmo se o JavaScript que ativa busca, filtros e fichas falhar.
 
 A inicialização também não depende mais do elemento `#footer-count`, que havia sido removido durante a simplificação da interface. A versão 1.0.4 foi validada verificando os 108 cartões pré-renderizados, os quatro círculos, os cinco elementos, a existência de todos os seletores DOM exigidos e a ausência de dependências de importação de JSON.
+
+
+## Correção 1.0.7 — ícones incorporados e Morte em cinza-escuro
+
+Os cinco SVGs são incorporados ao próprio HTML como dados locais e convertidos em `data:image/svg+xml`, eliminando as requisições a caminhos relativos que geravam imagens quebradas no popover. As referências internas do sigilo de Conhecimento usam `href` e `xlink:href` para maior compatibilidade com Android WebView. As chaves internas dos elementos são mapeadas explicitamente para os cinco nomes de arquivos.
+
+Morte foi padronizada em cinza-escuro (`#55585E`) no SVG, nos tokens de cor, nos filtros, cartões e fichas. Os fundos claros anteriores foram removidos.
