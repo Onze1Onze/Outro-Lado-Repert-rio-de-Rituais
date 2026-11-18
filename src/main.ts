@@ -104,8 +104,9 @@ function getPrimaryTheme(ritual: Ritual) {
 function matchesFilters(ritual: Ritual): boolean {
   const elementNames = getRitualElements(ritual);
   const matchesElement = !selectedElement || elementNames.includes(selectedElement);
-  const normalizedQuery = activeQuery.trim().toLocaleLowerCase("pt-BR");
-  const searchable = `${ritual.name} ${elementNames.join(" ")} ${ritual.circle}`.toLocaleLowerCase("pt-BR");
+  const normalize = (value: string) => value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLocaleLowerCase("pt-BR");
+  const normalizedQuery = normalize(activeQuery.trim());
+  const searchable = normalize(`${ritual.name} ${elementNames.join(" ")} ${ritual.circle}`);
   const matchesQuery = !normalizedQuery || searchable.includes(normalizedQuery);
   return matchesElement && matchesQuery;
 }
@@ -113,7 +114,7 @@ function matchesFilters(ritual: Ritual): boolean {
 function renderFilters(): void {
   filtersNode.innerHTML = ELEMENTS.map((element) => `
     <button class="filter-chip" type="button" data-filter-element="${element.name}" aria-pressed="${selectedElement === element.name}" style="--element-accent:${element.accent}">
-      ${escapeHtml(element.name)}
+      <img class="filter-icon" src="./assets/elements/${element.icon}" alt="" draggable="false"><span>${escapeHtml(element.name)}</span>
     </button>
   `).join("");
 }
@@ -159,14 +160,12 @@ function renderCatalog(): void {
       elementSection.className = "element-section";
       elementSection.dataset.element = element.key;
       elementSection.style.setProperty("--element-accent", element.accent);
+      if (element.secondary) elementSection.style.setProperty("--element-accent-secondary", element.secondary);
       elementSection.innerHTML = `
         <header class="element-heading">
-          <span class="element-sigil" aria-hidden="true"><span>${element.symbol}</span></span>
-          <div>
-            <h3 class="element-name">${escapeHtml(element.name)}</h3>
-            <p class="element-descriptor">${escapeHtml(element.descriptor)}</p>
-          </div>
-          <span class="element-total">${records.length} ${records.length === 1 ? "RITUAL" : "RITUAIS"}</span>
+          <span class="element-sigil" aria-hidden="true"><img src="./assets/elements/${element.icon}" alt="" draggable="false"></span>
+          <h3 class="element-name">${escapeHtml(element.name)}</h3>
+          <span class="element-total">${records.length}</span>
         </header>
         <div class="ritual-grid"></div>
       `;
@@ -196,12 +195,14 @@ function createRitualCard(ritual: Ritual, element: (typeof ELEMENTS)[number]): H
   if (secondaryTheme) button.style.setProperty("--element-accent-secondary", secondaryTheme.accent);
   button.setAttribute("aria-label", `${ritual.name}, ${ritual.circle}º círculo, ${elementLabel}. Abrir ficha.`);
   button.innerHTML = `
-    <span class="card-sigil" aria-hidden="true"><span>${element.symbol}</span></span>
+    <span class="card-sigil" aria-hidden="true">${elementNames.map((name) => {
+      const theme = ELEMENT_BY_NAME.get(name);
+      return theme ? `<img class="ritual-symbol" src="./assets/elements/${theme.icon}" alt="" draggable="false">` : "";
+    }).join("")}</span>
     <span class="card-copy">
       <span class="card-title">${escapeHtml(ritual.name)}</span>
-      <span class="card-subtitle">${ritual.circle}º Círculo — ${escapeHtml(elementLabel)}</span>
+      <span class="card-subtitle">${ritual.circle}º · ${escapeHtml(elementLabel)}</span>
     </span>
-    <span class="card-arrow" aria-hidden="true">›</span>
   `;
   button.addEventListener("click", () => openDetail(ritual));
   return button;
@@ -224,6 +225,7 @@ function renderDetail(ritual: Ritual): void {
   if (!element) return;
   const allThemes = elementNames.map((name) => ELEMENT_BY_NAME.get(name)).filter((theme): theme is NonNullable<typeof theme> => Boolean(theme));
   const elementLabel = getElementLabel(ritual);
+  detailLayer.dataset.element = element.key;
   detailLayer.style.setProperty("--detail-accent", element.accent);
   if (allThemes[1]) detailLayer.style.setProperty("--detail-accent-secondary", allThemes[1].accent);
   else detailLayer.style.removeProperty("--detail-accent-secondary");
@@ -253,10 +255,8 @@ function renderDetail(ritual: Ritual): void {
 
   detailContent.innerHTML = `
     <section class="detail-hero${elementNames.length > 1 ? " is-multi-element" : ""}" style="--detail-accent:${element.accent};--detail-accent-secondary:${allThemes[1]?.accent ?? element.accent}">
-      <div class="detail-symbol" aria-hidden="true" style="font-size:${elementNames.length > 2 ? 15 : elementNames.length > 1 ? 26 : 37}px">${allThemes.map((theme) => theme.symbol).join(" · ")}</div>
-      <p class="detail-kicker">${escapeHtml(elementLabel)} · ${ritual.circle}º CÍRCULO</p>
+      <div class="detail-symbol" aria-hidden="true">${allThemes.map((theme) => `<img src="./assets/elements/${theme.icon}" alt="" draggable="false">`).join("")}</div>
       <h2 class="detail-title" id="detail-title">${escapeHtml(ritual.name)}</h2>
-      <p class="detail-element-line">${escapeHtml(element.descriptor)}</p>
     </section>
     <div class="detail-meta-grid">
       ${meta.map(([label, value]) => `<div class="detail-meta-card"><span class="detail-meta-label">${label}</span><span class="detail-meta-value">${escapeHtml(value)}</span></div>`).join("")}
