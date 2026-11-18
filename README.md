@@ -63,7 +63,7 @@ O workflow em `.github/workflows/deploy.yml` constrói o projeto e publica `dist
 
 Manifesto para instalação/atualização no Owlbear Rodeo (versão 1.0.4):
 
-`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.7`
+`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.8`
 
 Arquivo-fonte do manifesto no GitHub:
 
@@ -122,3 +122,8 @@ A inicialização também não depende mais do elemento `#footer-count`, que hav
 Os cinco SVGs são incorporados ao próprio HTML como dados locais e convertidos em `data:image/svg+xml`, eliminando as requisições a caminhos relativos que geravam imagens quebradas no popover. As referências internas do sigilo de Conhecimento usam `href` e `xlink:href` para maior compatibilidade com Android WebView. As chaves internas dos elementos são mapeadas explicitamente para os cinco nomes de arquivos.
 
 Morte foi padronizada em cinza-escuro (`#55585E`) no SVG, nos tokens de cor, nos filtros, cartões e fichas. Os fundos claros anteriores foram removidos.
+
+
+## Correção de interface 1.0.8
+
+A folha de estilos completa do popover foi reconstruída após uma regressão que havia removido os estilos de agrupamento, cartões e dimensões dos símbolos. O catálogo volta a exibir cabeçalhos de círculos, seções elementais e cartões quadrados com dimensões máximas explícitas para os SVGs. O layout usa duas colunas em popovers estreitos e até quatro em áreas mais largas. Morte permanece em cinza-escuro.
