@@ -53,7 +53,7 @@ Requisitos: Node.js 22 ou compatível e npm.
 
 1. `npm install`
 2. `npm run dev`
-3. Sirva o `manifest.json` no mesmo host e informe sua URL no perfil do Owlbear Rodeo. A página do popover usa `extension.html`.
+3. Sirva o `manifest.json` no mesmo host e informe sua URL no perfil do Owlbear Rodeo. A página do popover usa `extension.html`. O HTML referencia diretamente o CSS e o módulo JavaScript do navegador; dessa forma, o popover também continua executável quando o host entrega a árvore-fonte, sem depender da execução de TypeScript bruto.
 4. `npm test` executa a validação do catálogo e a verificação de tipos TypeScript.
 5. `npm run build` valida os dados, gera o bundle e copia o manifesto e o ícone para a raiz do pacote publicado.
 
@@ -61,9 +61,9 @@ Requisitos: Node.js 22 ou compatível e npm.
 
 O workflow em `.github/workflows/deploy.yml` constrói o projeto e publica `dist/` no GitHub Pages em cada push para `main`. **Configuração inicial necessária:** abra `Settings → Pages` no repositório, em `Build and deployment` selecione `GitHub Actions` como `Source` e salve. A conexão GitHub usada para o workflow não tem permissão administrativa para criar o site Pages automaticamente; depois de habilitá-lo nas configurações, abra `Actions` e execute novamente `Build and deploy Owlbear extension`. A compilação Vite e o typecheck já passaram; a publicação fica pendente dessa ativação.
 
-Manifesto para instalação após o primeiro deploy bem-sucedido do Pages:
+Manifesto para instalação/atualização no Owlbear Rodeo (versão 1.0.1, com cache-busting):
 
-`https://Onze1Onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json`
+`https://onze1onze.github.io/Outro-Lado-Repert-rio-de-Rituais/manifest.json?v=1.0.1`
 
 Arquivo-fonte do manifesto no GitHub:
 
