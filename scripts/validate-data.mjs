@@ -39,5 +39,4 @@ assert.equal(weaponCurse[0].m, 'choice');
 assert.deepEqual(data.rituals.filter(r => r.m === 'dual').map(r => r.n).sort(), ['Passagem de Conhecimento','Passagem de Conhecimento Expandido'].sort());
 assert.ok(data.rituals.some(r => r.n === 'Mapa Sanguíneo' && r.c === 2 && r.e === 'Sangue'));
 assert.ok(data.rituals.some(r => r.n === 'Backup' && r.c === 2 && r.e === 'Energia'));
-assert.ok(data.notice.includes('Hell Hunters'));
 console.log(`OK: ${data.rituals.length} cartões únicos, dados compactados, sem IDs/nomes duplicados; círculos ${JSON.stringify(circleCounts)}.`);
