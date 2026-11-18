@@ -1,23 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 554 554" width="256" height="256">
-  <defs><filter id="brush" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
-  <g fill="none" stroke="#55DDEB" stroke-linecap="round" stroke-linejoin="round" filter="url(#brush)">
+  <defs>
+    <linearGradient id="energy" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#55DDEB"/><stop offset="48%" stop-color="#E477C2"/><stop offset="100%" stop-color="#55DDEB"/></linearGradient>
+    <filter id="brush" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g fill="none" stroke="url(#energy)" stroke-linecap="round" stroke-linejoin="round" filter="url(#brush)">
+
+    <!-- Lâmina superior -->
     <path stroke-width="18" d="M322,62 C292,100 242,140 207,172 C196,185 205,200 225,215 C245,230 258,240 268,252"/>
     <path stroke-width="6" d="M300,95 C270,130 235,160 212,180"/>
-    <polygon fill="#55DDEB" stroke="none" points="327,54 320,64 306,120 296,180 291,244 280,246 279,170 290,120 310,72"/>
+    <polygon fill="url(#energy)" stroke="none" points="327,54 320,64 306,120 296,180 291,244 280,246 279,170 290,120 310,72"/>
+
+    <!-- Braço esquerdo do V -->
     <path stroke-width="8" d="M96,213 C112,217 130,225 148,236"/>
     <path stroke-width="19" d="M140,232 C170,252 190,275 208,305 C235,352 255,420 270,483"/>
     <path stroke-width="6" d="M118,212 C165,225 205,275 238,332"/>
     <path stroke-width="5" d="M130,222 C175,240 210,285 232,322"/>
+
+    <!-- Braço direito do V -->
     <path stroke-width="8" d="M460,214 C440,218 424,225 408,234"/>
     <path stroke-width="19" d="M416,230 C385,250 365,275 346,305 C318,352 290,420 270,483"/>
     <path stroke-width="6" d="M438,212 C392,228 350,280 320,336"/>
     <path stroke-width="5" d="M426,222 C382,240 346,284 326,322"/>
+
+    <!-- Linha ondulada (chifres) com arco central -->
     <path stroke-width="13" d="M106,386 C132,398 158,390 175,362 C190,335 196,312 222,290 C240,272 256,262 276,260 C300,258 315,285 325,305 C340,326 356,330 372,346 C392,368 410,386 438,386"/>
     <path stroke-width="5" d="M110,394 C140,402 165,396 182,372"/>
     <path stroke-width="5" d="M434,394 C410,396 390,382 372,358"/>
+
+    <!-- Traços finos centrais -->
     <path stroke-width="5" d="M265,288 C264,320 266,345 270,372"/>
     <path stroke-width="4" d="M255,300 C262,296 276,296 286,302"/>
     <path stroke-width="3" d="M246,268 C250,285 258,300 262,315"/>
   </g>
-  <g fill="#55DDEB" filter="url(#brush)"><ellipse cx="108" cy="386" rx="9" ry="7"/><ellipse cx="436" cy="386" rx="9" ry="7"/></g>
+
+  <!-- Pontas arredondadas dos pés -->
+  <g fill="url(#energy)" filter="url(#brush)">
+    <ellipse cx="108" cy="386" rx="9" ry="7"/>
+    <ellipse cx="436" cy="386" rx="9" ry="7"/>
+  </g>
 </svg>
