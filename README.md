@@ -59,7 +59,7 @@ Requisitos: Node.js 22 ou compatível e npm.
 
 ## Publicação
 
-O workflow em `.github/workflows/deploy.yml` constrói o projeto e publica `dist/` no GitHub Pages em cada push para `main`. O repositório deve estar configurado para usar GitHub Actions como origem do Pages.
+O workflow em `.github/workflows/deploy.yml` constrói o projeto e publica `dist/` no GitHub Pages em cada push para `main`. **Configuração inicial necessária:** abra `Settings → Pages` no repositório, em `Build and deployment` selecione `GitHub Actions` como `Source` e salve. A conexão GitHub usada para o workflow não tem permissão administrativa para criar o site Pages automaticamente; depois de habilitá-lo nas configurações, abra `Actions` e execute novamente `Build and deploy Owlbear extension`. A compilação Vite e o typecheck já passaram; a publicação fica pendente dessa ativação.
 
 Manifesto para instalação após o primeiro deploy bem-sucedido do Pages:
 
